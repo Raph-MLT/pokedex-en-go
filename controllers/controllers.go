@@ -2,18 +2,12 @@ package controllers
 
 import (
 	"errors"
-	"html/template"
 	"net/http"
 	"strconv"
 
+	"pokedex/helpers"
 	"pokedex/models"
 	"pokedex/services"
-)
-
-var (
-	listTemplate   = template.Must(template.ParseFiles("templates/list.html"))
-	detailTemplate = template.Must(template.ParseFiles("templates/detail.html"))
-	errorTemplate  = template.Must(template.ParseFiles("templates/error.html"))
 )
 
 func ListPokemon(w http.ResponseWriter, r *http.Request) {
@@ -22,7 +16,7 @@ func ListPokemon(w http.ResponseWriter, r *http.Request) {
 		showError(w, err)
 		return
 	}
-	listTemplate.Execute(w, pokemons)
+	helpers.Render(w, "list.html", pokemons)
 }
 
 func DetailPokemon(w http.ResponseWriter, r *http.Request) {
@@ -37,7 +31,7 @@ func DetailPokemon(w http.ResponseWriter, r *http.Request) {
 		showError(w, err)
 		return
 	}
-	detailTemplate.Execute(w, pokemon)
+	helpers.Render(w, "pokemon.html", pokemon)
 }
 
 func showError(w http.ResponseWriter, err error) {
@@ -52,5 +46,5 @@ func showError(w http.ResponseWriter, err error) {
 	}
 
 	w.WriteHeader(status)
-	errorTemplate.Execute(w, err.Error())
+	helpers.Render(w, "error.html", err.Error())
 }
