@@ -1,25 +1,17 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"net/http"
 
-	"pokedex/services"
+	"pokedex/controllers"
 )
 
 func main() {
-	pikachu, err := services.GetPokemon(25)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Pokémon n°25 :", pikachu.Name.Fr)
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /{$}", controllers.ListPokemon)
+	mux.HandleFunc("GET /pokemon/{id}", controllers.DetailPokemon)
 
-	pokemons, err := services.GetAllPokemon()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Nombre de Pokémon :", len(pokemons))
-
-	_, err = services.GetPokemon(0)
-	fmt.Println("Test id 0 :", err)
+	log.Println("Serveur lancé sur http://localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }
