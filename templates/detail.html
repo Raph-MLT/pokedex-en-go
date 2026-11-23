@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.Name.Fr}} - Pokédex</title>
+</head>
+<body>
+    <a href="/">Retour à la liste</a>
+    <h1>n°{{.PokedexID}} {{.Name.Fr}}</h1>
+    <img src="{{.Sprites.Regular}}" alt="{{.Name.Fr}}" width="200">
+    <p>{{.Category}}</p>
+    <h2>Types</h2>
+    <ul>
+        {{range .Types}}
+        <li>
+            <img src="{{.Image}}" alt="" width="24">
+            {{.Name}}
+        </li>
+        {{end}}
+    </ul>
+</body>
+</html>
