@@ -42,3 +42,14 @@ a {
     color: #777;
     font-size: 0.9em;
 }
+
+footer {
+    margin-top: 32px;
+    text-align: center;
+    color: #777;
+    font-size: 0.9em;
+}
+
+footer a {
+    text-decoration: underline;
+}
