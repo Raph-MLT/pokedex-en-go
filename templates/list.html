@@ -7,8 +7,12 @@
 </head>
 <body>
     <h1>Pokédex</h1>
+    <form action="/pokemon" method="GET">
+        <input type="text" name="nom" value="{{.Nom}}" placeholder="Nom du Pokémon">
+        <button type="submit">Rechercher</button>
+    </form>
     <ul class="liste">
-        {{range .}}
+        {{range .Pokemons}}
         <li>
             <a href="/pokemon/{{.PokedexID}}">
                 <img src="{{.Sprites.Regular}}" alt="{{.Name.Fr}}" width="96">
@@ -17,7 +21,7 @@
             </a>
         </li>
         {{else}}
-        <li>Aucun Pokémon à afficher.</li>
+        <li>Aucun Pokémon ne correspond à « {{.Nom}} ».</li>
         {{end}}
     </ul>
 </body>

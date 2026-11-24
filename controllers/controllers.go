@@ -10,13 +10,20 @@ import (
 	"pokedex/services"
 )
 
+type listPage struct {
+	Pokemons []models.Pokemon
+	Nom      string
+}
+
 func ListPokemon(w http.ResponseWriter, r *http.Request) {
-	pokemons, err := services.GetAllPokemon()
+	nom := r.URL.Query().Get("nom")
+
+	pokemons, err := services.SearchPokemon(nom)
 	if err != nil {
 		showError(w, r, err)
 		return
 	}
-	helpers.Render(w, "list.html", pokemons)
+	helpers.Render(w, "list.html", listPage{Pokemons: pokemons, Nom: nom})
 }
 
 func DetailPokemon(w http.ResponseWriter, r *http.Request) {
