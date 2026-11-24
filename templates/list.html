@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Pokédex</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <h1>Pokédex</h1>
-    <ul>
+    <ul class="liste">
         {{range .}}
         <li>
             <a href="/pokemon/{{.PokedexID}}">
                 <img src="{{.Sprites.Regular}}" alt="{{.Name.Fr}}" width="96">
-                n°{{.PokedexID}} {{.Name.Fr}}
+                <span>n°{{.PokedexID}}</span>
+                <strong>{{.Name.Fr}}</strong>
             </a>
         </li>
+        {{else}}
+        <li>Aucun Pokémon à afficher.</li>
         {{end}}
     </ul>
 </body>
