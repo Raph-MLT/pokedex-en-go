@@ -12,5 +12,6 @@ func New() *http.ServeMux {
 	mux.HandleFunc("GET /pokemon", controllers.ListPokemon)
 	mux.HandleFunc("GET /pokemon/{id}", controllers.DetailPokemon)
 	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("assets"))))
+	mux.HandleFunc("/", controllers.NotFound)
 	return mux
 }
