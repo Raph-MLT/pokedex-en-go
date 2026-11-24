@@ -1,6 +1,8 @@
 package services
 
 import (
+	"strconv"
+
 	"pokedex/api"
 	"pokedex/models"
 )
@@ -20,8 +22,9 @@ func GetAllPokemon() ([]models.Pokemon, error) {
 	return result, nil
 }
 
-func GetPokemon(id int) (models.Pokemon, error) {
-	if id < 1 {
+func GetPokemon(idText string) (models.Pokemon, error) {
+	id, err := strconv.Atoi(idText)
+	if err != nil || id < 1 {
 		return models.Pokemon{}, models.ErrBadRequest
 	}
 	return api.GetPokemon(id)

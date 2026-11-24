@@ -3,7 +3,6 @@ package controllers
 import (
 	"errors"
 	"net/http"
-	"strconv"
 
 	"pokedex/helpers"
 	"pokedex/models"
@@ -20,13 +19,7 @@ func ListPokemon(w http.ResponseWriter, r *http.Request) {
 }
 
 func DetailPokemon(w http.ResponseWriter, r *http.Request) {
-	id, err := strconv.Atoi(r.PathValue("id"))
-	if err != nil {
-		showError(w, models.ErrBadRequest)
-		return
-	}
-
-	pokemon, err := services.GetPokemon(id)
+	pokemon, err := services.GetPokemon(r.PathValue("id"))
 	if err != nil {
 		showError(w, err)
 		return
